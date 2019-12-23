@@ -51,30 +51,16 @@ function updateChromeDriver() {
     exit 1
   fi
 
-  if [ -f "chromedriver_${machine}" ]; then
-    rm "chromedriver_${machine}"
-    if [ $? -ne 0 ]; then
-      echo "Can't remove chromedriver_${machine}"
-      exit 1
-    fi
-  fi
-
-  mv chromedriver "chromedriver_${machine}"
+  chmod +x chromedriver
   if [ $? -ne 0 ]; then
-    echo "Can't move chromedriver to chromedriver_${machine}"
-    exit 1
-  fi
-
-  chmod +x "chromedriver_${machine}"
-  if [ $? -ne 0 ]; then
-    echo "Can't change permissions on file chromedriver_${machine}"
+    echo "Can't change permissions on file chromedriver"
     exit 1
   fi
 
   echo "Chromedriver updated seccesfull to version ${chromedriver}"
 }
 
-FILE=chromedriver_${machine}
+FILE=chromedriver
 if [ ! -f "$FILE" ]; then
   updateChromeDriver
 else
